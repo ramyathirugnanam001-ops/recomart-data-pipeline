@@ -1,0 +1,4 @@
+user_id,session_id,event_type,item_id,event_timestamp,device_type,platform
+u1,s1,view,p101,2026-02-15T10:00:00Z,mobile,android
+u1,s1,add_to_cart,p101,2026-02-15T10:01:00Z,mobile,android
+u2,s2,view,p202,2026-02-15T11:00:00Z,web,chrome

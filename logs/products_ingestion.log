@@ -1,0 +1,4 @@
+{"ts": "2026-04-28T06:55:51+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "job_start", "event": "job_start", "endpoint": null, "page_size": 200, "mode": "mock"}
+{"ts": "2026-04-28T06:55:51+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "ingest_success", "event": "ingest_success", "mode": "mock", "pages": 1, "items": 2, "output": "data\\raw\\data\\raw\\catalog\\products\\ingest_date=2026-04-28\\ingest_hour=06\\products_mock_20260428T065551Z.json"}
+{"ts": "2026-04-28T06:55:51+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "cycle_complete", "event": "cycle_complete", "pages": 1, "items": 2, "duration_sec": 0.022}
+{"ts": "2026-04-28T06:55:51+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "job_end", "event": "job_end"}

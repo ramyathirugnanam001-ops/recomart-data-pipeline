@@ -1,0 +1,4 @@
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "job_start", "event": "job_start", "endpoint": null, "page_size": 200, "mode": "mock"}
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "ingest_success", "event": "ingest_success", "mode": "mock", "pages": 1, "items": 2, "output": "/mnt/data/recomart_ingestion/data/raw/catalog/products/ingest_date=2026-02-16/ingest_hour=13/products_mock_20260216T131335Z.json"}
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "cycle_complete", "event": "cycle_complete", "pages": 1, "items": 2, "duration_sec": 0.001}
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_products_api", "msg": "job_end", "event": "job_end"}

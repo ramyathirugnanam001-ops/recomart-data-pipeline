@@ -1,0 +1,4 @@
+user_id,item_id,activity_count,avg_price,popularity,recency
+u1,p101,2,799.0,2,3600.0
+u1,p101,2,799.0,2,3540.0
+u2,p202,1,499.0,1,0.0

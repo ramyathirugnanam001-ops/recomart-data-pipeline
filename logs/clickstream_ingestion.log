@@ -1,0 +1,4 @@
+{"ts": "2026-04-28T06:54:20+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "job_start", "event": "job_start", "input_dir": "sample_input", "pattern": "*.csv"}
+{"ts": "2026-04-28T06:54:20+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "ingest_success", "event": "ingest_success", "file": "clickstream_2026-02-15.csv", "sha256": "c19c3b85149cbfd30772650c425a1b9852134344549853c5ab1b0d8e43345fe4", "output": "data\\raw\\data\\raw\\clickstream\\events\\ingest_date=2026-04-28\\ingest_hour=06\\clickstream_2026-02-15.csv"}
+{"ts": "2026-04-28T06:54:20+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "cycle_complete", "event": "cycle_complete", "found": 1, "ingested": 1, "skipped": 0, "failed": 0, "duration_sec": 0.039}
+{"ts": "2026-04-28T06:54:20+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "job_end", "event": "job_end"}

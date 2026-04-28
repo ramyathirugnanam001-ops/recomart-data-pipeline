@@ -1,0 +1,9 @@
+# Example configuration (optional)
+clickstream:
+  input_dir: sample_input
+  pattern: "clickstream_*.csv"
+  checkpoint: .checkpoints/clickstream_files.txt
+products_api:
+  endpoint: "https://api.recomart.com/v1/products"
+  page_size: 200
+  timeout_sec: 10

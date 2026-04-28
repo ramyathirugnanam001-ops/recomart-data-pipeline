@@ -1,0 +1,4 @@
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "job_start", "event": "job_start", "input_dir": "/mnt/data/recomart_ingestion/sample_input", "pattern": "clickstream_*.csv"}
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "ingest_success", "event": "ingest_success", "file": "clickstream_2026-02-15.csv", "sha256": "c19c3b85149cbfd30772650c425a1b9852134344549853c5ab1b0d8e43345fe4", "output": "/mnt/data/recomart_ingestion/data/raw/clickstream/events/ingest_date=2026-02-16/ingest_hour=13/clickstream_2026-02-15.csv"}
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "cycle_complete", "event": "cycle_complete", "found": 1, "ingested": 1, "skipped": 0, "failed": 0, "duration_sec": 0.001}
+{"ts": "2026-02-16T13:13:35+00:00", "level": "INFO", "logger": "ingest_clickstream_csv", "msg": "job_end", "event": "job_end"}
