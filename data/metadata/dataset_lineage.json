@@ -1,0 +1,378 @@
+{
+  "project": "recomart-data-pipeline",
+  "generated_at": "2026-04-29T14:16:00.777921+00:00",
+  "versioning_tool": "Git LFS",
+  "versioning_rules": {
+    "tracked_patterns": [
+      "data/raw/**",
+      "data/prepared/**",
+      "data/features/**",
+      "feature_store/**/*.csv",
+      "models/**",
+      "logs/**",
+      "sample_logs/**"
+    ],
+    "rules_file": ".gitattributes",
+    "workflow": "data files are stored through Git LFS pointers while lineage metadata is committed to Git"
+  },
+  "datasets": [
+    {
+      "dataset_id": "raw_product_catalog",
+      "version": "2026-02-16_13",
+      "layer": "raw",
+      "path": "data/raw/catalog/products/ingest_date=2026-02-16/ingest_hour=13/products_mock_20260216T131335Z.json",
+      "format": "json",
+      "source": "sample_input/products_mock.json or products REST API",
+      "ingestion": {
+        "ingest_date": "2026-02-16",
+        "ingest_hour": "13"
+      },
+      "transformations": [
+        "landed unchanged in partitioned raw zone"
+      ],
+      "bytes": 301,
+      "sha256": "39314b04a9c7016b3c80eca511fb33b2f21e0deb5d35a1a32f268049d6d80426"
+    },
+    {
+      "dataset_id": "raw_clickstream_events",
+      "version": "2026-02-16_13",
+      "layer": "raw",
+      "path": "data/raw/clickstream/events/ingest_date=2026-02-16/ingest_hour=13/clickstream_2026-02-15.csv",
+      "format": "csv",
+      "source": "sample_input/clickstream_2026-02-15.csv",
+      "ingestion": {
+        "ingest_date": "2026-02-16",
+        "ingest_hour": "13"
+      },
+      "transformations": [
+        "landed unchanged in partitioned raw zone"
+      ],
+      "bytes": 238,
+      "sha256": "8477cbd39516df64ea7236869126075284830771d1d8082c739255c9c74a02b7"
+    },
+    {
+      "dataset_id": "raw_product_catalog",
+      "version": "2026-04-28_06",
+      "layer": "raw",
+      "path": "data/raw/data/raw/catalog/products/ingest_date=2026-04-28/ingest_hour=06/products_mock_20260428T065551Z.json",
+      "format": "json",
+      "source": "sample_input/products_mock.json or products REST API",
+      "ingestion": {
+        "ingest_date": "2026-04-28",
+        "ingest_hour": "06"
+      },
+      "transformations": [
+        "landed unchanged in partitioned raw zone"
+      ],
+      "bytes": 301,
+      "sha256": "39314b04a9c7016b3c80eca511fb33b2f21e0deb5d35a1a32f268049d6d80426"
+    },
+    {
+      "dataset_id": "raw_clickstream_events",
+      "version": "2026-04-28_06",
+      "layer": "raw",
+      "path": "data/raw/data/raw/clickstream/events/ingest_date=2026-04-28/ingest_hour=06/clickstream_2026-02-15.csv",
+      "format": "csv",
+      "source": "sample_input/clickstream_2026-02-15.csv",
+      "ingestion": {
+        "ingest_date": "2026-04-28",
+        "ingest_hour": "06"
+      },
+      "transformations": [
+        "landed unchanged in partitioned raw zone"
+      ],
+      "bytes": 238,
+      "sha256": "8477cbd39516df64ea7236869126075284830771d1d8082c739255c9c74a02b7"
+    },
+    {
+      "dataset_id": "feature_store_final_features",
+      "version": "20260428_160452",
+      "layer": "transformed",
+      "path": "feature_store/20260428_160452/final_features.csv",
+      "format": "csv",
+      "source": [
+        "raw_clickstream_events",
+        "raw_product_catalog"
+      ],
+      "upstream_layers": [
+        "raw",
+        "prepared"
+      ],
+      "transformations": [
+        "drop duplicate clickstream and product rows",
+        "impute missing identifiers and product prices",
+        "parse event_timestamp as UTC",
+        "join clickstream events to product catalog on item_id",
+        "encode category, brand, and platform",
+        "normalize price",
+        "derive activity_count, avg_price, popularity, and recency"
+      ],
+      "bytes": 136,
+      "sha256": "40b82e6f27446c0058188291a8112f63cb8aca8d554a71a3518ed7a158b7f030",
+      "metadata_path": "feature_store/20260428_160452/feature_metadata.json",
+      "created_at": "2026-04-28T16:04:52.291248",
+      "entity_keys": [
+        "user_id",
+        "item_id"
+      ],
+      "features": [
+        {
+          "name": "activity_count",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by user_id"
+        },
+        {
+          "name": "avg_price",
+          "dtype": "float",
+          "source": "products + clickstream",
+          "transformation": "average price grouped by user_id"
+        },
+        {
+          "name": "popularity",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by item_id"
+        },
+        {
+          "name": "recency",
+          "dtype": "float",
+          "source": "clickstream",
+          "transformation": "time difference in seconds from latest event_timestamp"
+        }
+      ]
+    },
+    {
+      "dataset_id": "feature_store_final_features",
+      "version": "20260428_160805",
+      "layer": "transformed",
+      "path": "feature_store/20260428_160805/final_features.csv",
+      "format": "csv",
+      "source": [
+        "raw_clickstream_events",
+        "raw_product_catalog"
+      ],
+      "upstream_layers": [
+        "raw",
+        "prepared"
+      ],
+      "transformations": [
+        "drop duplicate clickstream and product rows",
+        "impute missing identifiers and product prices",
+        "parse event_timestamp as UTC",
+        "join clickstream events to product catalog on item_id",
+        "encode category, brand, and platform",
+        "normalize price",
+        "derive activity_count, avg_price, popularity, and recency"
+      ],
+      "bytes": 136,
+      "sha256": "40b82e6f27446c0058188291a8112f63cb8aca8d554a71a3518ed7a158b7f030",
+      "metadata_path": "feature_store/20260428_160805/feature_metadata.json",
+      "created_at": "2026-04-28T16:08:05.549519",
+      "entity_keys": [
+        "user_id",
+        "item_id"
+      ],
+      "features": [
+        {
+          "name": "activity_count",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by user_id"
+        },
+        {
+          "name": "avg_price",
+          "dtype": "float",
+          "source": "products + clickstream",
+          "transformation": "average price grouped by user_id"
+        },
+        {
+          "name": "popularity",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by item_id"
+        },
+        {
+          "name": "recency",
+          "dtype": "float",
+          "source": "clickstream",
+          "transformation": "time difference in seconds from latest event_timestamp"
+        }
+      ]
+    },
+    {
+      "dataset_id": "feature_store_final_features",
+      "version": "20260428_160833",
+      "layer": "transformed",
+      "path": "feature_store/20260428_160833/final_features.csv",
+      "format": "csv",
+      "source": [
+        "raw_clickstream_events",
+        "raw_product_catalog"
+      ],
+      "upstream_layers": [
+        "raw",
+        "prepared"
+      ],
+      "transformations": [
+        "drop duplicate clickstream and product rows",
+        "impute missing identifiers and product prices",
+        "parse event_timestamp as UTC",
+        "join clickstream events to product catalog on item_id",
+        "encode category, brand, and platform",
+        "normalize price",
+        "derive activity_count, avg_price, popularity, and recency"
+      ],
+      "bytes": 136,
+      "sha256": "40b82e6f27446c0058188291a8112f63cb8aca8d554a71a3518ed7a158b7f030",
+      "metadata_path": "feature_store/20260428_160833/feature_metadata.json",
+      "created_at": "2026-04-28T16:08:33.839280",
+      "entity_keys": [
+        "user_id",
+        "item_id"
+      ],
+      "features": [
+        {
+          "name": "activity_count",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by user_id"
+        },
+        {
+          "name": "avg_price",
+          "dtype": "float",
+          "source": "products + clickstream",
+          "transformation": "average price grouped by user_id"
+        },
+        {
+          "name": "popularity",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by item_id"
+        },
+        {
+          "name": "recency",
+          "dtype": "float",
+          "source": "clickstream",
+          "transformation": "time difference in seconds from latest event_timestamp"
+        }
+      ]
+    },
+    {
+      "dataset_id": "feature_store_final_features",
+      "version": "20260428_160835",
+      "layer": "transformed",
+      "path": "feature_store/20260428_160835/final_features.csv",
+      "format": "csv",
+      "source": [
+        "raw_clickstream_events",
+        "raw_product_catalog"
+      ],
+      "upstream_layers": [
+        "raw",
+        "prepared"
+      ],
+      "transformations": [
+        "drop duplicate clickstream and product rows",
+        "impute missing identifiers and product prices",
+        "parse event_timestamp as UTC",
+        "join clickstream events to product catalog on item_id",
+        "encode category, brand, and platform",
+        "normalize price",
+        "derive activity_count, avg_price, popularity, and recency"
+      ],
+      "bytes": 136,
+      "sha256": "40b82e6f27446c0058188291a8112f63cb8aca8d554a71a3518ed7a158b7f030",
+      "metadata_path": "feature_store/20260428_160835/feature_metadata.json",
+      "created_at": "2026-04-28T16:08:35.728837",
+      "entity_keys": [
+        "user_id",
+        "item_id"
+      ],
+      "features": [
+        {
+          "name": "activity_count",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by user_id"
+        },
+        {
+          "name": "avg_price",
+          "dtype": "float",
+          "source": "products + clickstream",
+          "transformation": "average price grouped by user_id"
+        },
+        {
+          "name": "popularity",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by item_id"
+        },
+        {
+          "name": "recency",
+          "dtype": "float",
+          "source": "clickstream",
+          "transformation": "time difference in seconds from latest event_timestamp"
+        }
+      ]
+    },
+    {
+      "dataset_id": "feature_store_final_features",
+      "version": "20260428_160922",
+      "layer": "transformed",
+      "path": "feature_store/20260428_160922/final_features.csv",
+      "format": "csv",
+      "source": [
+        "raw_clickstream_events",
+        "raw_product_catalog"
+      ],
+      "upstream_layers": [
+        "raw",
+        "prepared"
+      ],
+      "transformations": [
+        "drop duplicate clickstream and product rows",
+        "impute missing identifiers and product prices",
+        "parse event_timestamp as UTC",
+        "join clickstream events to product catalog on item_id",
+        "encode category, brand, and platform",
+        "normalize price",
+        "derive activity_count, avg_price, popularity, and recency"
+      ],
+      "bytes": 136,
+      "sha256": "40b82e6f27446c0058188291a8112f63cb8aca8d554a71a3518ed7a158b7f030",
+      "metadata_path": "feature_store/20260428_160922/feature_metadata.json",
+      "created_at": "2026-04-28T16:09:22.899766",
+      "entity_keys": [
+        "user_id",
+        "item_id"
+      ],
+      "features": [
+        {
+          "name": "activity_count",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by user_id"
+        },
+        {
+          "name": "avg_price",
+          "dtype": "float",
+          "source": "products + clickstream",
+          "transformation": "average price grouped by user_id"
+        },
+        {
+          "name": "popularity",
+          "dtype": "int",
+          "source": "clickstream",
+          "transformation": "count of interactions grouped by item_id"
+        },
+        {
+          "name": "recency",
+          "dtype": "float",
+          "source": "clickstream",
+          "transformation": "time difference in seconds from latest event_timestamp"
+        }
+      ]
+    }
+  ]
+}
