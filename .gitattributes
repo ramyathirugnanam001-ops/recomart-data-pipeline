@@ -1,0 +1,7 @@
+data/raw/** filter=lfs diff=lfs merge=lfs -text
+data/prepared/** filter=lfs diff=lfs merge=lfs -text
+data/features/** filter=lfs diff=lfs merge=lfs -text
+feature_store/**/*.csv filter=lfs diff=lfs merge=lfs -text
+models/** filter=lfs diff=lfs merge=lfs -text
+logs/** filter=lfs diff=lfs merge=lfs -text
+sample_logs/** filter=lfs diff=lfs merge=lfs -text
