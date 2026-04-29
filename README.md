@@ -10,6 +10,7 @@ This project contains the deliverables for the DMML Group Assignment 1.
 | 5  Preparation | `GROUP29_DMML_ASSIGNMENT1.ipynb`, `pipeline/tasks/prepare.py` |                                                            |
 | 6  Transformation | notebook, `pipeline/tasks/transform.py` |                                                            |
 | 7  Feature store | `feature_store/`, `pipeline/tasks/feature_store.py` | versioned                                                  |
+| 8  Data versioning and lineage | `.gitattributes`, `data/metadata/dataset_lineage.json`, `docs/DATA_VERSIONING_AND_LINEAGE.md` | Git LFS workflow + dataset lineage metadata |
 | 9  Model training | `pipeline/tasks/train.py` | TruncatedSVD recommender                                   |
 | **10  Orchestration** | **`pipeline/`** | **Prefect flow + DAG; For reference `pipeline/TASK10.md`** |
 
@@ -98,6 +99,10 @@ Logs are emitted as JSON lines to stdout and `--log-file` for monitoring/audit.
 
 - Clickstream ingestion is idempotent using a checkpoint file under `.checkpoints/`.
 - Products API ingestion has retries with exponential backoff for transient failures.
+- Data versioning and lineage are documented in
+  `docs/DATA_VERSIONING_AND_LINEAGE.md`. Dataset artifacts are tracked with
+  Git LFS patterns in `.gitattributes`, and lineage metadata is generated with
+  `py -3 scripts/generate_lineage_manifest.py`.
 
 ---
 
