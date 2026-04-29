@@ -1,0 +1,43 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Ignored default folder with query files
+/queries/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Logs
+logs/
+sample_logs/
+
+# Data outputs
+data/prepared/
+data/features/
+
+# Feature store
+feature_store/
+
+# Models
+models/
+
+# Checkpoints
+.checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+# Raw data
+data/raw/
+# Sample logs
+sample_logs/
