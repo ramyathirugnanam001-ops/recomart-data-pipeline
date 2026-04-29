@@ -1,4 +1,32 @@
-# RecoMart – Data Collection & Ingestion (Task 2)
+# RecoMart – End-to-End Data Pipeline
+
+This project contains the deliverables for the DMML Group Assignment 1.
+
+| Task | Folder / File | Notes |
+| ---- | ------------- | ----- |
+| 2  Ingestion | `scripts/` | CSV + REST API ingestion |
+| 3  Raw storage | `data/raw/` | Hive-style partitioned layout |
+| 4  Validation | `pipeline/tasks/validate.py` | Schema/null/range checks |
+| 5  Preparation | `GROUP29_DMML_ASSIGNMENT1.ipynb`, `pipeline/tasks/prepare.py` | |
+| 6  Transformation | notebook, `pipeline/tasks/transform.py` | |
+| 7  Feature store | `feature_store/`, `pipeline/tasks/feature_store.py` | versioned |
+| 9  Model training | `pipeline/tasks/train.py` | TruncatedSVD recommender |
+| **10  Orchestration** | **`pipeline/`** | **Prefect flow + DAG; see `pipeline/README.md` and `pipeline/TASK10.md`** |
+
+Quick start for the orchestrated end-to-end run:
+
+```powershell
+py -3 -m pip install -r requirements.txt
+py -3 -m pipeline.flow --once
+```
+
+A console log of a successful run is preserved at
+`sample_logs/prefect_flow_run.log` and a structured run summary at
+`logs/pipeline_summary_<run_id>.json`.
+
+---
+
+## Ingestion scripts (Task 2)
 
 This folder contains ingestion scripts for **two data types**:
 1. **User interactions** from CSV files (clickstream exports)
