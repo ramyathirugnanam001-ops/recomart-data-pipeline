@@ -1,0 +1,37 @@
+{
+    "feature_store_name": "recomart_feature_store",
+    "version": "20260501_124826",
+    "created_at": "2026-05-01T12:48:26.282893+00:00",
+    "entity_keys": [
+        "user_id",
+        "item_id"
+    ],
+    "source_dataset": "final_features",
+    "row_count": 3,
+    "features": [
+        {
+            "name": "activity_count",
+            "dtype": "int",
+            "source": "clickstream",
+            "transformation": "count of interactions grouped by user_id"
+        },
+        {
+            "name": "avg_price",
+            "dtype": "float",
+            "source": "products + clickstream",
+            "transformation": "average price grouped by user_id"
+        },
+        {
+            "name": "popularity",
+            "dtype": "int",
+            "source": "clickstream",
+            "transformation": "count of interactions grouped by item_id"
+        },
+        {
+            "name": "recency",
+            "dtype": "float",
+            "source": "clickstream",
+            "transformation": "time difference in seconds from latest event_timestamp"
+        }
+    ]
+}

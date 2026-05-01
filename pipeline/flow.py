@@ -39,6 +39,7 @@ from prefect.tasks import exponential_backoff  # noqa: E402
 from pipeline.tasks import (  # noqa: E402
     feature_store as fs_stage,
     ingest as ingest_stage,
+    lineage as lineage_stage,
     prepare as prepare_stage,
     train as train_stage,
     transform as transform_stage,
@@ -176,6 +177,17 @@ def train_task(fs_out: dict, models_root: str) -> dict:
     return metadata
 
 
+@task(name="lineage_manifest", log_prints=True)
+def lineage_task(project_root: str, output_path: str) -> dict:
+    logger = get_run_logger()
+    info = lineage_stage.regenerate_manifest(
+        project_root=Path(project_root),
+        output_path=Path(output_path),
+    )
+    logger.info("Lineage manifest regenerated: %s", info)
+    return info
+
+
 # ---------------------------------------------------------------------------
 # Prefect flow (DAG)
 # ---------------------------------------------------------------------------
@@ -235,6 +247,12 @@ def recomart_pipeline(
 
     train_out = train_task.submit(fs_out, str(root / "models"))
 
+    lineage_out = lineage_task.submit(
+        str(root),
+        str(root / "data" / "metadata" / "dataset_lineage.json"),
+        wait_for=[train_out],
+    )
+
     summary = {
         "run_id": run_id,
         "ingest_clickstream": cs_stats.result(),
@@ -244,6 +262,7 @@ def recomart_pipeline(
         "transform": transform_out.result(),
         "feature_store": fs_out.result(),
         "train": train_out.result(),
+        "lineage": lineage_out.result(),
     }
 
     summary_path = root / "logs" / f"pipeline_summary_{run_id}.json"
